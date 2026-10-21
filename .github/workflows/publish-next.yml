@@ -19,20 +19,20 @@ permissions:
 
 jobs:
   setup-cache:
-    uses: aws-amplify/amplify-ui/.github/workflows/reusable-setup-cache.yml@main
+    uses: aws-amplify/amplify-ui/.github/workflows/reusable-setup-cache.yml@f5325b0e7028b6543b2d99519f033680d9a8367e # main
     with:
       commit: ${{ github.sha }}
       repository: ${{ github.repository }}
 
   unit:
-    uses: aws-amplify/amplify-ui/.github/workflows/reusable-unit.yml@main
+    uses: aws-amplify/amplify-ui/.github/workflows/reusable-unit.yml@f5325b0e7028b6543b2d99519f033680d9a8367e # main
     needs: setup-cache
     with:
       commit: ${{ github.sha }}
       repository: ${{ github.repository }}
 
   e2e:
-    uses: aws-amplify/amplify-ui/.github/workflows/reusable-e2e.yml@main
+    uses: aws-amplify/amplify-ui/.github/workflows/reusable-e2e.yml@f5325b0e7028b6543b2d99519f033680d9a8367e # main
     needs: unit
     with:
       commit: ${{ github.sha }}
@@ -57,7 +57,7 @@ jobs:
       DOCSEARCH_DOCS_INDEX_NAME: ${{ secrets.DOCSEARCH_DOCS_INDEX_NAME }}
 
   publish:
-    uses: aws-amplify/amplify-ui/.github/workflows/reusable-tagged-publish.yml@main
+    uses: aws-amplify/amplify-ui/.github/workflows/reusable-tagged-publish.yml@f5325b0e7028b6543b2d99519f033680d9a8367e # main
     with:
       dist-tag: next
     secrets:
@@ -102,7 +102,7 @@ jobs:
     if: ${{ failure() }}
     steps:
       - name: Log failure data point to metric PublishNextFailure
-        uses: aws-amplify/amplify-ui/.github/actions/log-metric@main
+        uses: aws-amplify/amplify-ui/.github/actions/log-metric@f5325b0e7028b6543b2d99519f033680d9a8367e # main
         with:
           metric-name: PublishNextFailure
           value: 1
@@ -119,7 +119,7 @@ jobs:
     if: ${{ success() }}
     steps:
       - name: Log success data point to metric PublishNextFailure
-        uses: aws-amplify/amplify-ui/.github/actions/log-metric@main
+        uses: aws-amplify/amplify-ui/.github/actions/log-metric@f5325b0e7028b6543b2d99519f033680d9a8367e # main
         with:
           metric-name: PublishNextFailure
           value: 0
