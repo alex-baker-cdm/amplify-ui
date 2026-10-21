@@ -53,10 +53,16 @@ on:
       DOCSEARCH_DOCS_INDEX_NAME:
         required: true
 
+permissions:
+  contents: read
+
 jobs:
   e2e:
     # Only run e2e tests if unit tests pass
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # This is required for actions/checkout
+      id-token: write # This is required for aws-actions/configure-aws-credentials
     environment: ci
     env:
       NODE_ENV: test
@@ -390,6 +396,9 @@ jobs:
     if: false # Temporarily disable RN iOS tests
     # if: ${{ inputs.skip-changed-packages-check == 'true' || needs.check-changed-packages.outputs.has-changed-packages == 'true' }}
     runs-on: macos-13
+    permissions:
+      contents: read # This is required for actions/checkout
+      id-token: write # This is required for aws-actions/configure-aws-credentials
     environment: ci
     env:
       NODE_ENV: test
@@ -511,6 +520,9 @@ jobs:
     if: false # Temporarily disable RN Android tests
     # if: ${{ inputs.skip-changed-packages-check == 'true' || needs.check-changed-packages.outputs.has-changed-packages == 'true' }}
     runs-on: macos-13
+    permissions:
+      contents: read # This is required for actions/checkout
+      id-token: write # This is required for aws-actions/configure-aws-credentials
     environment: ci
     env:
       NODE_ENV: test
